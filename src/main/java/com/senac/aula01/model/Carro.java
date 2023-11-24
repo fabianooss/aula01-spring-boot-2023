@@ -4,10 +4,14 @@
  */
 package com.senac.aula01.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 /**
  *
@@ -21,6 +25,25 @@ public class Carro {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    private String nome;
+    
+    private String placa;
+    
+    private String cor;
+    
+    private String modelo;
+    
+    private Double valor;
+    
+    private Integer ano;
+    
+    @ManyToOne
+    private Proprietario proprietario;
+    
+    @OneToMany(mappedBy = "carro", cascade = CascadeType.ALL )
+    private List<Comentario> comentarios;
+    
 
     public Long getId() {
         return id;
@@ -77,18 +100,24 @@ public class Carro {
     public void setAno(Integer ano) {
         this.ano = ano;
     }
+
+    public Proprietario getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(Proprietario proprietario) {
+        this.proprietario = proprietario;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
     
-    private String nome;
-    
-    private String placa;
-    
-    private String cor;
-    
-    private String modelo;
-    
-    private Double valor;
-    
-    private Integer ano;
+
     
     
     
